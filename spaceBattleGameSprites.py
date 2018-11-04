@@ -544,10 +544,10 @@ class Highscore(pygame.sprite.Sprite):
             self.__scorefile.close()
         except IOError:
             self.__latest_score = "N/A"
-            print "./Data/highscore.txt could not be opened"
+            print("./Data/highscore.txt could not be opened")
         except ValueError:
             self.__latest_score = "N/A"
-            print "./Data/highscore.txt contains corrupt data"
+            print("./Data/highscore.txt contains corrupt data")
 
         self.image = self.__font.render(str(self.__latest_score), 1, (255, 168, 0))
         self.rect = self.image.get_rect()
