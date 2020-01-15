@@ -8,7 +8,15 @@
 # IMPORT AND INITIALIZE
 import pygame
 import random
-import spaceBattleGameSprites
+from SpriteLib.bullet import Bullet
+from SpriteLib.enemyShip import EnemyShip
+from SpriteLib.highscore import Highscore
+from SpriteLib.instructions import Instructions
+from SpriteLib.lifekeeper import Lifekeeper
+from SpriteLib.playerShip import PlayerShip
+from SpriteLib.powerup import Powerup
+from SpriteLib.scorekeeper import Scorekeeper
+
 import sys
 import json
 
@@ -28,8 +36,8 @@ def main():
     new_score = 0
     # Alternates between the game, and the starting screen until the player stops playing
     while True:
-        if instructions(screen, new_score, FPS): # If the instructions are accepted then start a new game
-            new_score = game(screen, FPS)
+        if render_instructions(screen, new_score, FPS): # If the instructions are accepted then start a new game
+            new_score = render_game(screen, FPS)
         else:
             break
 
@@ -37,7 +45,7 @@ def main():
     pygame.quit()
 
 
-def instructions(screen, new_score, fps):
+def render_instructions(screen, new_score, fps):
     """This function displays the starting screen, and handles if the player wants to play or quit.
        Returns True if the player wants to play. Returns False if the player wants to quit."""
     # DISPLAY
@@ -47,8 +55,8 @@ def instructions(screen, new_score, fps):
     background = pygame.image.load("./Sprite/space.png").convert()
     screen.blit(background, (0, 0))
 
-    instructions_label = spaceBattleGameSprites.Instructions(screen)
-    highscore_label = spaceBattleGameSprites.Highscore()
+    instructions_label = Instructions(screen)
+    highscore_label = Highscore()
     # Update the score file if new highscore
     if new_score > highscore_label.get_latest_score():
         highscore_label.new_highscore(new_score)
@@ -59,7 +67,7 @@ def instructions(screen, new_score, fps):
     # Instantiate 6 ships
     allShips = []
     for ship in range(6):
-        allShips.append(spaceBattleGameSprites.EnemyShip(screen))
+        allShips.append(EnemyShip(screen))
     allShips = pygame.sprite.Group(allShips)
 
     allSprites = pygame.sprite.OrderedUpdates(allShips, highscore_label, instructions_label)
@@ -98,7 +106,7 @@ def instructions(screen, new_score, fps):
         pygame.display.flip()
 
 
-def game(screen, fps):
+def render_game(screen, fps):
     """This is the main function that handles the main logic of the game. It will return the score that was acheived."""
     # DISPLAY
     # screen = screen
@@ -116,11 +124,11 @@ def game(screen, fps):
     enemyShoot = pygame.mixer.Sound("./Sound/laser1.wav")
     enemyShoot.set_volume(1.0)
 
-    scorekeeper = spaceBattleGameSprites.Scorekeeper(screen)
-    lifekeeper = spaceBattleGameSprites.Lifekeeper(screen)
-    player = spaceBattleGameSprites.PlayerShip(screen)
+    scorekeeper = Scorekeeper(screen)
+    lifekeeper = Lifekeeper(screen)
+    player = PlayerShip(screen)
 
-    enemyGroup = pygame.sprite.Group(spaceBattleGameSprites.EnemyShip(screen))
+    enemyGroup = pygame.sprite.Group(EnemyShip(screen))
     bulletGroup = pygame.sprite.Group()
     powerupGroup = pygame.sprite.Group()
 
@@ -164,7 +172,7 @@ def game(screen, fps):
             if keys[pygame.K_RIGHT]:
                 player.rotate(-5)
             if keys[pygame.K_SPACE]:
-                bulletGroup.add(spaceBattleGameSprites.Bullet(screen, player, "PLAYER"))
+                bulletGroup.add(Bullet(screen, player, "PLAYER"))
                 allSprites = pygame.sprite.OrderedUpdates(bulletGroup, powerupGroup, player, enemyGroup,
                                                           scorekeeper, lifekeeper)
             if keys[pygame.K_a]:
@@ -222,7 +230,7 @@ def game(screen, fps):
         if random.randint(1, 35) == 1:
             for enemy in enemyGroup:
                 enemyShoot.play()
-                bulletGroup.add(spaceBattleGameSprites.Bullet(screen, enemy, "ENEMY", player))
+                bulletGroup.add(Bullet(screen, enemy, "ENEMY", player))
                 allSprites = pygame.sprite.OrderedUpdates(bulletGroup, powerupGroup, player, enemyGroup,
                                                           scorekeeper, lifekeeper)
 
@@ -236,14 +244,14 @@ def game(screen, fps):
 
         # Increase maximum ships every 10 destroyed
         if destroyedShips % 10 == 0 and not alreadyIncreased:
-            enemyGroup.add(pygame.sprite.Group(spaceBattleGameSprites.EnemyShip(screen)))
+            enemyGroup.add(pygame.sprite.Group(EnemyShip(screen)))
             allSprites = pygame.sprite.OrderedUpdates(bulletGroup, powerupGroup, player, enemyGroup,
                                                       scorekeeper, lifekeeper)
             alreadyIncreased = True
 
         # Powerup generation
         if random.randint(1, 500) == 250:
-            powerupGroup.add(spaceBattleGameSprites.Powerup(screen, random.randint(1, 3)))
+            powerupGroup.add(Powerup(screen, random.randint(1, 3)))
             allSprites = pygame.sprite.OrderedUpdates(bulletGroup, powerupGroup, player, enemyGroup,
                                                       scorekeeper, lifekeeper)
 
