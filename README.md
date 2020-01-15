@@ -22,6 +22,8 @@ pip install pygame
 python .\spaceBattleGame.py
 ```
 
+### Screenshots
+
 ## Thanks
 [Kenney](https://www.kenney.nl) for their sprites and sounds
 

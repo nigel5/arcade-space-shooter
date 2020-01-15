@@ -10,27 +10,34 @@ import pygame
 import random
 import spaceBattleGameSprites
 import sys
+import json
+
+config = json.load(open("./settings.json"))
 
 pygame.mixer.init()
 pygame.init()
 
-
 def main():
     """The main function handles the Game <--> Instruction screen loop"""
-    screen = pygame.display.set_mode((640, 480), pygame.FULLSCREEN)
+    FPS = config.get("framerate")
+    RESOLUTION = (config.get("resolutionx"), config.get("resolutiony"))
+
+    screen = pygame.display.set_mode(RESOLUTION, pygame.FULLSCREEN if config.get("fullscreen") else 0)
     pygame.display.set_caption("spaceBattleGame 2019")
+
     new_score = 0
     # Alternates between the game, and the starting screen until the player stops playing
     while True:
-        if instructions(screen, new_score):
-            new_score = game(screen)
+        if instructions(screen, new_score, FPS): # If the instructions are accepted then start a new game
+            new_score = game(screen, FPS)
         else:
             break
+
     pygame.mixer.quit()
     pygame.quit()
 
 
-def instructions(screen, new_score):
+def instructions(screen, new_score, fps):
     """This function displays the starting screen, and handles if the player wants to play or quit.
        Returns True if the player wants to play. Returns False if the player wants to quit."""
     # DISPLAY
@@ -91,7 +98,7 @@ def instructions(screen, new_score):
         pygame.display.flip()
 
 
-def game(screen):
+def game(screen, fps):
     """This is the main function that handles the main logic of the game. It will return the score that was acheived."""
     # DISPLAY
     screen = screen
@@ -108,6 +115,7 @@ def game(screen):
     coolMusic.play(-1)
     enemyShoot = pygame.mixer.Sound("./Sound/laser1.wav")
     enemyShoot.set_volume(1.0)
+
     scorekeeper = spaceBattleGameSprites.Scorekeeper(screen)
     lifekeeper = spaceBattleGameSprites.Lifekeeper(screen)
     player = spaceBattleGameSprites.PlayerShip(screen)
@@ -129,7 +137,10 @@ def game(screen):
     # LOOP
     while keepGoing:
         # TIME
-        clock.tick(30)
+        if sys.platform == "darwin":
+            clock.tick_busy_loop(60)
+        else:
+            clock.tick(60)
 
         # EVENTS
         for event in pygame.event.get():
