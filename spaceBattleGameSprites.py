@@ -1,6 +1,6 @@
 """
     spaceBattleGame sprite module
-    (c) 2018 nigel5
+    (c) 2019 nigel5
 """
 import pygame
 import math

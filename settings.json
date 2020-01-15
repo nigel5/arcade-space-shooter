@@ -1,6 +1,6 @@
 {
     "framerate": 60,
-    "fullscreen": false,
+    "fullscreen": true,
     "resolutionx": 640,
     "resolutiony": 480,
     "sound": true

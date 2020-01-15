@@ -3,7 +3,7 @@
      Destroy as many enemy spaceships as you can
      Do not collide with enemy spaceships, or you will blow up!
      Collect crates to get boost you spaceship's health, shield, or damage
-     (c) 2018 nigel5
+     (c) 2019 nigel5
 """
 # IMPORT AND INITIALIZE
 import pygame
@@ -41,7 +41,7 @@ def instructions(screen, new_score, fps):
     """This function displays the starting screen, and handles if the player wants to play or quit.
        Returns True if the player wants to play. Returns False if the player wants to quit."""
     # DISPLAY
-    screen = screen
+    # screen
 
     # ENTITIES
     background = pygame.image.load("./Sprite/space.png").convert()
@@ -101,7 +101,7 @@ def instructions(screen, new_score, fps):
 def game(screen, fps):
     """This is the main function that handles the main logic of the game. It will return the score that was acheived."""
     # DISPLAY
-    screen = screen
+    # screen = screen
 
     # ENTITIES
     background = pygame.image.load("./Sprite/space.png").convert()

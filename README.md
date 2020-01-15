@@ -22,7 +22,21 @@ pip install pygame
 python .\spaceBattleGame.py
 ```
 
-### Screenshots
+### Settings
+| Key         | Description                                | Default |
+|-------------|--------------------------------------------|---------|
+| framerate   | Game frame rate in frames per second (fps) | 60      |
+| fullscreen  | Whether to run the game in fullscreen      | true    |
+| resolutionx | Screen width in pixels                     | 640     |
+| resolutiony | Screen height in pixels                    | 480     |
+| sound       | on/off volume (planned feature)            | true    |
+
+### Gameplay
+![Space battle gameplay](./screenshots/gameplay.gif)
+
+
+### Planned Features
+- Adjust sound level
 
 ## Thanks
 [Kenney](https://www.kenney.nl) for their sprites and sounds
