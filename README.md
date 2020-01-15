@@ -2,6 +2,8 @@
 
 Here's a topdown shooter game that I made with pygame for Python3.
 
+![Space battle gameplay](./screenshots/gameplay.gif)
+
 ### Features
 - Destroy as many enemy spaceships without getting destroyed yourself! 💯
 - Collect health, shield, and damage crates to survive longer! ❤️
@@ -31,13 +33,13 @@ python .\spaceBattleGame.py
 | resolutiony | Screen height in pixels                    | 480     |
 | sound       | on/off volume (planned feature)            | true    |
 
-### Gameplay
-![Space battle gameplay](./screenshots/gameplay.gif)
-Gameplay footage
+### Instructions
+- WASD controls
+- Spacebar to shoot
+- Left and right arrows to rotate
 
 ![Instructions](./screenshots/instructions.png)
 Instructions screen and high score
-
 
 ### Planned Features
 - Adjust sound level
