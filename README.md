@@ -43,6 +43,7 @@ Instructions screen and high score
 
 ### Planned Features
 - Adjust sound level
+- Joystick input
 
 ### Known Issues
 - Low FPS when running windows mode on Retina displays
