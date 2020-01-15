@@ -9,6 +9,7 @@
 import pygame
 import random
 import spaceBattleGameSprites
+import sys
 
 pygame.mixer.init()
 pygame.init()
@@ -16,8 +17,8 @@ pygame.init()
 
 def main():
     """The main function handles the Game <--> Instruction screen loop"""
-    screen = pygame.display.set_mode((640, 480))
-    pygame.display.set_caption("spaceBattleGame 2018")
+    screen = pygame.display.set_mode((640, 480), pygame.FULLSCREEN)
+    pygame.display.set_caption("spaceBattleGame 2019")
     new_score = 0
     # Alternates between the game, and the starting screen until the player stops playing
     while True:
@@ -65,7 +66,10 @@ def instructions(screen, new_score):
     while keepGoing:
 
         # TIME
-        clock.tick(30)
+        if sys.platform == "darwin":
+            clock.tick_busy_loop(60)
+        else:
+            clock.tick(60)
 
         # EVENTS
         for event in pygame.event.get():
