@@ -33,10 +33,17 @@ python .\spaceBattleGame.py
 
 ### Gameplay
 ![Space battle gameplay](./screenshots/gameplay.gif)
+Gameplay footage
+
+![Instructions](./screenshots/instructions.png)
+Instructions screen and high score
 
 
 ### Planned Features
 - Adjust sound level
+
+### Known Issues
+- Low FPS when running windows mode on Retina displays
 
 ## Thanks
 [Kenney](https://www.kenney.nl) for their sprites and sounds
