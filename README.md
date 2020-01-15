@@ -9,6 +9,7 @@ Here's a topdown shooter game that I made with pygame for Python3.
 - Collect health, shield, and damage crates to survive longer! ❤️
 - Don't collide with the other spaceships! Lookup for the massive UFO 👾
 - Beat your friend's highscores! 🏆
+- Game gets harder as more points are accumulated
 
 ### Prerequisites
 - python-3.7+
@@ -47,6 +48,7 @@ Instructions screen and high score
 
 ### Known Issues
 - Low FPS when running windows mode on Retina displays
+- `abort trap 6` in OSX 10.15.2
 
 ## Thanks
 [Kenney](https://www.kenney.nl) for their sprites and sounds
